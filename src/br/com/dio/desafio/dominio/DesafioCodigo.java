@@ -7,12 +7,23 @@ import java.util.Scanner;
 public class DesafioCodigo extends Conteudo{
 
     private ArrayList<String> questoes;
+    private Dev participanteNoDesafio;
+    private Curso c;
 
     private int respostasCorretas;
 
 
     public DesafioCodigo(ArrayList<String> questoes) {
         this.questoes = questoes;
+    }
+
+
+    public Dev getParticipanteNoDesafio() {
+        return participanteNoDesafio;
+    }
+
+    public void setParticipanteNoDesafio(Dev participanteNoDesafio) {
+        this.participanteNoDesafio = participanteNoDesafio;
     }
 
     @Override
@@ -26,7 +37,10 @@ public class DesafioCodigo extends Conteudo{
         return XP_PADRAO * respostasCorretas;
     }
 
-    public void questionario () {
+    public void questionario (Dev desenvolvedor, Curso c) {
+
+        this.setParticipanteNoDesafio(desenvolvedor);
+        this.setC(c);
 
         Scanner input = new Scanner(System.in);
 
@@ -64,11 +78,20 @@ public class DesafioCodigo extends Conteudo{
         this.questoes = questoes;
     }
 
+
+    public Curso getC() {
+        return c;
+    }
+
+    public void setC(Curso c) {
+        this.c = c;
+    }
+
     @Override
     public String toString() {
-        return "DesafioCodigo{" +
-                "respostasCorretas=" + respostasCorretas +
-                "XP Adquirido=" + calcularXp() +
+        return "DesafioCodigo\n Dev " +  getParticipanteNoDesafio().getNome() + "{" +
+                "respostasCorretas no curso " + c.getTitulo() + "="  + respostasCorretas +
+                "\nXP Adquirido=" + calcularXp() +
                 '}';
     }
 }

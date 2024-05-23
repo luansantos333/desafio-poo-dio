@@ -12,10 +12,7 @@ public class Main {
         curso1.setCargaHoraria(8);
         curso1.setListaDeDesafiosDoCurso(new ArrayList<>());
         curso1.getListaDeDesafiosDoCurso().add(new DesafioCodigo(new ArrayList<>(List.of("Questão 1", "Questão 2", "Questão 3"))));
-        Curso curso2 = new Curso();
-        curso2.setTitulo("Curso Javascript");
-        curso2.setDescricao("Javascript básico");
-        curso2.setCargaHoraria(4);
+
 
         Mentoria mentoria = new Mentoria();
         mentoria.setTitulo("Mentoria de Java");
@@ -23,18 +20,16 @@ public class Main {
         mentoria.setData(LocalDate.now());
 
         System.out.println(curso1);
-        System.out.println(curso2);
         System.out.println(mentoria);
 
         Bootcamp bootcamp = new Bootcamp();
         bootcamp.setNome("Bootcamp Java Developer");
         bootcamp.setDescricao("Descrição Bootcamp Java Developer");
         bootcamp.getConteudos().add(curso1);
-        bootcamp.getConteudos().add(curso2);
         bootcamp.getConteudos().add(mentoria);
 
         Dev devLuan = new Dev();
-        devLuan.setNome("Camila");
+        devLuan.setNome("Luan");
         devLuan.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos Luan:" + devLuan.getConteudosInscritos());
         devLuan.progredir();
@@ -44,37 +39,29 @@ public class Main {
         System.out.println("Conteúdos Concluídos Luan:" + devLuan.getConteudosConcluidos());
         System.out.println("XP:" + devLuan.calcularTotalXp() + "\n");
 
-
-
         bootcamp.getConteudos().forEach(c -> {
 
-            Curso b = (Curso) c;
-            System.out.println("Desafio Curso");
-
-            for (DesafioCodigo d : b.getListaDeDesafiosDoCurso()) {
-
-                d.questionario();
-                System.out.println(d.toString() + "\n");
 
 
+
+            if (c instanceof Curso) {
+
+                System.out.println("Desafio Curso");
+
+                Curso b = (Curso) c;
+
+                for (DesafioCodigo d : b.getListaDeDesafiosDoCurso()) {
+
+                    d.questionario(devLuan, curso1);
+                    System.out.println(d.toString() + "\n");
+
+                }
             }
+
         });
 
-
-        System.out.println("-------");
-
-        Dev devJoao = new Dev();
-        devJoao.setNome("Joao");
-        devJoao.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
 
     }
 
 }
+
